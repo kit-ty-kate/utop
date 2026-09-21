@@ -1,3 +1,7 @@
+#if OCAML_VERSION < (5, 6, 0)
+module Utf8_lexeme = Misc.Utf8_lexeme
+#endif
+
 let get_desc x =
 #if OCAML_VERSION >= (4, 14, 0)
   Types.get_desc x
@@ -28,11 +32,7 @@ let destruct_ldot p s =
 (* Check whether an identifier is a valid one. *)
 #if OCAML_VERSION >= (5, 3, 0)
 let is_valid_identifier id =
-#if OCAML_VERSION >= (5, 6, 0)
   Utf8_lexeme.is_valid_identifier id
-#else
-  Misc.Utf8_lexeme.is_valid_identifier id
-#endif
 let lax_modname_from_cmi = Unit_info.lax_modname_from_source
 #else
 let is_valid_identifier id =
